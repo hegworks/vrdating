@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/Main 1.unity
+    path: Assets/_Project/Scenes/Attempt 1 - KKSpeechRecognizer.unity
     guid: 9d7fb453f95eb7e48b98d6a2c7d8a4c7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e7b6cf70c80d6634799bd6c8ea8a47ff,
