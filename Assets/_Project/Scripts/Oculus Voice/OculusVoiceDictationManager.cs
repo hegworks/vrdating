@@ -1,81 +1,58 @@
-using KKSpeech;
+using Meta.WitAi.Dictation.Data;
+using Meta.WitAi.Json;
+using Oculus.Voice.Dictation;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class OculusVoiceDictationManager : MonoBehaviour
 {
+    [SerializeField] private AppDictationExperience _appDictationExperience;
+
     [SerializeField] private Button _recordBtn;
     [SerializeField] private TextMeshProUGUI _recordBtnTxt;
     [SerializeField] private TextMeshProUGUI _resultTxt;
 
-    public void OnFinalResult(string result)
+    private void Update()
     {
-        _recordBtnTxt.text = "Start Recording";
-        _resultTxt.text = result;
-        _recordBtn.enabled = true;
-    }
-
-    public void OnPartialResult(string result)
-    {
-        _resultTxt.text = result;
-    }
-
-    private void OnAvailabilityChange(bool available)
-    {
-        _recordBtn.enabled = available;
-        if (!available)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _resultTxt.text = "Speech Recognition not available";
-        }
-        else
-        {
-            _resultTxt.text = "Say something :-)";
+            _appDictationExperience.Activate();
         }
     }
 
-    private void OnAuthorizationStatusFetched(AuthorizationStatus status)
+    public void OnStart()
     {
-        switch (status)
-        {
-            case AuthorizationStatus.Authorized:
-                _recordBtn.enabled = true;
-                break;
-            default:
-                _recordBtn.enabled = false;
-                _resultTxt.text = "Cannot use Speech Recognition, authorization status is " + status;
-                break;
-        }
+        Debug.Log("OnStart");
     }
 
-    private void OnEndOfSpeech()
+    public void OnDictationSessionStarted(DictationSession ds)
     {
-        _recordBtnTxt.text = "Start Recording";
+        Debug.Log($"OnDictationStart - response: {ds.response}");
     }
 
-    private void OnError(string error)
+    public void OnDictationSessionStopped(DictationSession ds)
     {
-        Debug.LogError(error);
-        _recordBtnTxt.text = "Start Recording";
-        _recordBtn.enabled = true;
+        Debug.Log($"OnDictationStopped - response: {ds.response}");
     }
 
-    private void OnRecordingPressed()
+    public void OnPartialTranscription(string transcription)
     {
-        if (SpeechRecognizer.IsRecording())
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                SpeechRecognizer.StopIfRecording();
-                _recordBtnTxt.text = "Start Recording";
-            }
-        }
-        else
-        {
-            SpeechRecognizer.StartRecording(true);
-            _recordBtnTxt.text = "Stop Recording";
-            _resultTxt.text = "Say something :-)";
-        }
+        Debug.Log($"OnPartialTranscription - transcription: {transcription}");
+    }
+
+    public void OnFullTranscription(string transcription)
+    {
+        Debug.Log($"OnFullTranscription - transcription: {transcription}");
+    }
+
+    public void OnStopped()
+    {
+        Debug.Log("OnStopped");
+    }
+
+    public void OnResponse(WitResponseNode wrn)
+    {
+        Debug.Log($"OnResponse - WitResponseNode: {wrn}");
     }
 }

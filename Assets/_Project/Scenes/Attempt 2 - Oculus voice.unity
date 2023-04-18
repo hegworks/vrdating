@@ -557,6 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da74e7a92da73a4cbc5bc7a55dc0908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _appDictationExperience: {fileID: 1608432401}
   _recordBtn: {fileID: 2150770518752902398}
   _recordBtnTxt: {fileID: 2150770518430006876}
   _resultTxt: {fileID: 2814035010770261446}
@@ -6472,15 +6473,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dictationEvents:
     _overriddenCallbacks:
-    - onPartialTranscription
+    - onStart
+    - onDictationSessionStopped
     - onDictationSessionStarted
+    - onPartialTranscription
+    - onFullTranscription
+    - onStopped
+    - onResponse
     onPartialTranscription:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 130469294}
           m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
-          m_MethodName: OnPartialResult
-          m_Mode: 5
+          m_MethodName: OnPartialTranscription
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6491,25 +6497,97 @@ MonoBehaviour:
           m_CallState: 2
     onFullTranscription:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnFullTranscription
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onResponse:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnResponse
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onStopped:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnStopped
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onError:
       m_PersistentCalls:
         m_Calls: []
     onDictationSessionStarted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnDictationSessionStarted
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onDictationSessionStopped:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 130469294}
+          m_TargetAssemblyTypeName: OculusVoiceDictationManager, Assembly-CSharp
+          m_MethodName: OnDictationSessionStopped
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onMicAudioLevel:
       m_PersistentCalls:
         m_Calls: []
@@ -6532,7 +6610,7 @@ MonoBehaviour:
       scenario: default
       inputType: text_default
   usePlatformServices: 0
-  enableConsoleLogging: 1
+  enableConsoleLogging: 0
 --- !u!4 &1608432402
 Transform:
   m_ObjectHideFlags: 0
